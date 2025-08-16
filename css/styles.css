@@ -11,6 +11,7 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     background-color: white;
+    padding-top: 70px; /* Отступ для фиксированного меню */
 }
 
 .container {
@@ -25,6 +26,12 @@ body {
     background-color: white;
     color: #2c2c2c;
     padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
 }
 
 .header__content {
@@ -34,6 +41,21 @@ body {
     flex-wrap: nowrap;
     gap: 20px;
     min-height: 70px;
+    transition: all 0.3s ease;
+}
+
+/* Компактное меню при скролле */
+.header--scrolled {
+    padding: 10px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.header--scrolled .header__content {
+    min-height: 50px;
+}
+
+.header--scrolled .header__logo-img {
+    height: 35px;
 }
 
 /* Logo */
@@ -74,6 +96,23 @@ body {
 
 .header__nav-link:hover {
     color: #ff6b00;
+}
+
+.header__nav-link--active {
+    color: #ff6b00 !important;
+    font-weight: bold;
+    position: relative;
+}
+
+.header__nav-link--active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #ff6b00;
+    border-radius: 1px;
 }
 
 /* Right Section */
@@ -811,6 +850,8 @@ body {
 
 .footer__link:hover {
     color: #ff6b00;
+    text-decoration: underline;
+    transition: all 0.3s ease;
 }
 
 .footer__contact {
