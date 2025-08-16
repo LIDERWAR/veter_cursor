@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ИРВЕЗТЕХ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -43,26 +46,42 @@
                     </ul>
                 </nav>
                 
+                <!-- Mobile Menu Button -->
+                <button class="header__mobile-btn" aria-label="Открыть меню">
+                    <span class="header__mobile-btn-line"></span>
+                    <span class="header__mobile-btn-line"></span>
+                    <span class="header__mobile-btn-line"></span>
+                </button>
+                
                 <!-- Right Section -->
                 <div class="header__right">
-                    <!-- Language Selector -->
-                    <div class="header__lang">
-                        <span class="header__lang-item header__lang-item--active">RU</span>
-                        <span class="header__lang-separator">|</span>
-                        <span class="header__lang-item">EN</span>
-                    </div>
-                    
                     <!-- Phone -->
                     <div class="header__phone">
                         <a href="tel:+73952999999" class="header__phone-link">+7 (3952) 99-99-99</a>
                     </div>
                     
                     <!-- Quote Button -->
-                    <button class="header__quote-btn">Запросить предложение</button>
+                    <button class="header__quote-btn">Подробнее</button>
                 </div>
             </div>
         </div>
     </header>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="header__mobile-menu">
+        <div class="header__mobile-menu-content">
+            <nav>
+                <ul class="header__mobile-menu-list">
+                    <li><a href="#about" class="header__mobile-menu-link" data-section="about">О компании</a></li>
+                    <li><a href="#catalog" class="header__mobile-menu-link" data-section="catalog">Каталог</a></li>
+                    <li><a href="#advantages" class="header__mobile-menu-link" data-section="advantages">Преимущества</a></li>
+                    <li><a href="#reviews" class="header__mobile-menu-link" data-section="reviews">Отзывы</a></li>
+                    <li><a href="#news" class="header__mobile-menu-link" data-section="news">Новости</a></li>
+                    <li><a href="#contact" class="header__mobile-menu-link" data-section="contact">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -127,7 +146,7 @@
                         <div class="catalog__specs">
                             <div class="catalog__spec">
                                 <span class="catalog__spec-value">8×8</span>
-                                <span class="catalog__spec-label">Колесная формула</span>
+                                <span class="catalog__spec-label">Формула</span>
                             </div>
                             <div class="catalog__spec">
                                 <span class="catalog__spec-value">1500 кг</span>
@@ -156,7 +175,7 @@
                         <div class="catalog__specs">
                             <div class="catalog__spec">
                                 <span class="catalog__spec-value">4×4</span>
-                                <span class="catalog__spec-label">Колесная формула</span>
+                                <span class="catalog__spec-label">Формула</span>
                             </div>
                             <div class="catalog__spec">
                                 <span class="catalog__spec-value">1000 кг</span>
@@ -185,7 +204,7 @@
                         <div class="catalog__specs">
                             <div class="catalog__spec">
                                 <span class="catalog__spec-value">4×4</span>
-                                <span class="catalog__spec-label">Колесная формула</span>
+                                <span class="catalog__spec-label">Формула</span>
                             </div>
                             <div class="catalog__spec">
                                 <span class="catalog__spec-value">900 кг</span>

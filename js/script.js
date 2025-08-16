@@ -1,227 +1,347 @@
-// Header functionality
+// ИРВЕЗТЕХ - Основной JavaScript файл
+
+// DOM элементы
+const header = document.querySelector('.header');
+const mobileBtn = document.querySelector('.header__mobile-btn');
+const mobileMenu = document.querySelector('.header__mobile-menu');
+const navLinks = document.querySelectorAll('.header__nav-link, .header__mobile-menu-link');
+const sections = document.querySelectorAll('section[id]');
+
+// Состояние
+let isMobileMenuOpen = false;
+let lastScrollTop = 0;
+
+// Инициализация
 document.addEventListener('DOMContentLoaded', () => {
-    // Language switching
-    const langItems = document.querySelectorAll('.header__lang-item');
+    if (header) initScrollEffects();
+    if (mobileBtn && mobileMenu) initMobileMenu();
+    initSmoothScrolling();
+    initScrollAnimations();
+    initParallaxEffect();
+    initFormValidation();
+});
+
+// Мобильное меню
+const initMobileMenu = () => {
+    if (!mobileBtn || !mobileMenu) return;
+
+    mobileBtn.addEventListener('click', toggleMobileMenu);
     
-    langItems.forEach(item => {
-        item.addEventListener('click', () => {
-            // Remove active class from all items
-            langItems.forEach(lang => lang.classList.remove('header__lang-item--active'));
-            // Add active class to clicked item
-            item.classList.add('header__lang-item--active');
-        });
-    });
-
-    // Quote button functionality
-    const quoteBtn = document.querySelector('.header__quote-btn');
-    if (quoteBtn) {
-        quoteBtn.addEventListener('click', () => {
-            alert('Форма запроса предложения будет открыта здесь');
-        });
-    }
-
-    // Phone link functionality
-    const phoneLink = document.querySelector('.header__phone-link');
-    if (phoneLink) {
-        phoneLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            const phoneNumber = phoneLink.textContent;
-            if (confirm(`Позвонить по номеру ${phoneNumber}?`)) {
-                window.location.href = `tel:+73952999999`;
-            }
-        });
-    }
-
-    // Main content buttons functionality
-    const catalogBtn = document.querySelector('.main-content__catalog-btn');
-    if (catalogBtn) {
-        catalogBtn.addEventListener('click', () => {
-            alert('Каталог вездеходов будет открыт здесь');
-        });
-    }
-
-    const vehicleBtns = document.querySelectorAll('.main-content__vehicle-btn');
-    vehicleBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const btnText = btn.textContent;
-            if (btnText.includes('ХАРАКТЕРИСТИКИ')) {
-                alert('Характеристики вездехода ВЕТЕР будут показаны здесь');
-            } else if (btnText.includes('КАЛЬКУЛЯТОР')) {
-                alert('Калькулятор вездехода будет открыт здесь');
-            }
-        });
-    });
-}); 
-
-// Навигация по секциям и активное состояние ссылок
-document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('.header__nav-link');
-    const sections = document.querySelectorAll('section[id]');
-    
-    // Плавная прокрутка к секциям
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-            
-            if (targetSection) {
-                // Убираем активный класс со всех ссылок
-                navLinks.forEach(link => link.classList.remove('header__nav-link--active'));
-                
-                // Добавляем активный класс к текущей ссылке
-                this.classList.add('header__nav-link--active');
-                
-                // Плавная прокрутка к секции
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-    
-    // Отслеживание активной секции при прокрутке
-    function updateActiveNavLink() {
-        const scrollPosition = window.scrollY + 100; // Небольшой отступ
-        
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            const sectionId = section.getAttribute('id');
-            
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                // Убираем активный класс со всех ссылок
-                navLinks.forEach(link => link.classList.remove('header__nav-link--active'));
-                
-                // Добавляем активный класс к соответствующей ссылке
-                const activeLink = document.querySelector(`[href="#${sectionId}"]`);
-                if (activeLink) {
-                    activeLink.classList.add('header__nav-link--active');
+    // Закрытие меню при клике на ссылку
+    if (navLinks && navLinks.length > 0) {
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (isMobileMenuOpen) {
+                    closeMobileMenu();
                 }
-            }
+            });
         });
     }
+
+    // Закрытие меню при клике вне его
+    document.addEventListener('click', (e) => {
+        if (isMobileMenuOpen && !mobileBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+            closeMobileMenu();
+        }
+    });
+};
+
+const toggleMobileMenu = () => {
+    if (isMobileMenuOpen) {
+        closeMobileMenu();
+    } else {
+        openMobileMenu();
+    }
+};
+
+const openMobileMenu = () => {
+    if (!mobileBtn || !mobileMenu) return;
     
-    // Обновляем активную ссылку при прокрутке
-    window.addEventListener('scroll', updateActiveNavLink);
+    isMobileMenuOpen = true;
+    mobileBtn.classList.add('header__mobile-btn--active');
+    mobileMenu.classList.add('header__mobile-menu--active');
+    document.body.style.overflow = 'hidden';
     
-    // Устанавливаем активную ссылку при загрузке страницы
-    updateActiveNavLink();
+    // Анимация появления пунктов меню
+    const menuItems = mobileMenu.querySelectorAll('.header__mobile-menu-link');
+    if (menuItems && menuItems.length > 0) {
+        menuItems.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+                item.style.transition = 'all 0.3s ease';
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+    }
+};
+
+const closeMobileMenu = () => {
+    if (!mobileBtn || !mobileMenu) return;
     
-    // Эффект скролла для фиксированного меню
-    function handleHeaderScroll() {
-        const header = document.querySelector('.header');
-        if (window.scrollY > 50) {
+    isMobileMenuOpen = false;
+    mobileBtn.classList.remove('header__mobile-btn--active');
+    mobileMenu.classList.remove('header__mobile-menu--active');
+    document.body.style.overflow = '';
+    
+    // Сброс анимации
+    const menuItems = mobileMenu.querySelectorAll('.header__mobile-menu-link');
+    if (menuItems && menuItems.length > 0) {
+        menuItems.forEach(item => {
+            item.style.opacity = '';
+            item.style.transform = '';
+            item.style.transition = '';
+        });
+    }
+};
+
+// Эффекты при скролле
+const initScrollEffects = () => {
+    if (!header) return;
+    
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Компактное меню при скролле
+        if (scrollTop > 100) {
             header.classList.add('header--scrolled');
         } else {
             header.classList.remove('header--scrolled');
         }
-    }
-    
-    // Обрабатываем скролл для меню
-    window.addEventListener('scroll', handleHeaderScroll);
-    
-    // Устанавливаем начальное состояние
-    handleHeaderScroll();
-    
-    // Обработка кнопок "Подробнее" в каталоге
-    const catalogButtons = document.querySelectorAll('.catalog__btn');
-    catalogButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const card = this.closest('.catalog__card');
-            const title = card.querySelector('.catalog__card-title').textContent;
-            alert(`Подробная информация о ${title} будет загружена в ближайшее время.`);
-        });
-    });
-    
-    // Обработка кнопки "Запросить расчет" в hero секции
-    const heroButton = document.querySelector('.hero__cta-btn');
-    if (heroButton) {
-        heroButton.addEventListener('click', function() {
-            // Прокрутка к форме контактов
-            const contactSection = document.getElementById('contact');
-            if (contactSection) {
-                contactSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+        
+        // Параллакс эффект для hero секции
+        if (scrollTop <= window.innerHeight) {
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                const scrolled = scrollTop * 0.5;
+                hero.style.transform = `translateY(${scrolled}px)`;
             }
-        });
-    }
-    
-    // Обработка кнопки "Подробнее о компании"
-    const aboutButton = document.querySelector('.about__cta-btn');
-    if (aboutButton) {
-        aboutButton.addEventListener('click', function() {
-            alert('Подробная информация о компании будет загружена в ближайшее время.');
-        });
-    }
-    
-    // Обработка кнопки "Подробнее" в новостях
-    const newsLinks = document.querySelectorAll('.news__read-more');
-    newsLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('Полная статья будет загружена в ближайшее время.');
-        });
+        }
+        
+        lastScrollTop = scrollTop;
     });
-    
-    // Обработка формы контактов
-    const contactForm = document.querySelector('.contact__form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+};
+
+// Плавная прокрутка
+const initSmoothScrolling = () => {
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
             e.preventDefault();
-            
-            // Получаем данные формы
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const phone = formData.get('phone');
-            const company = formData.get('company');
-            const message = formData.get('message');
-            
-            // Простая валидация
-            if (!name || !email || !message) {
-                alert('Пожалуйста, заполните все обязательные поля (имя, email, сообщение).');
-                return;
-            }
-            
-            // Имитация отправки формы
-            alert(`Спасибо, ${name}! Ваше сообщение отправлено. Мы свяжемся с вами в ближайшее время.`);
-            
-            // Очищаем форму
-            this.reset();
-        });
-    }
-    
-    // Обработка ссылок в футере
-    const footerLinks = document.querySelectorAll('.footer__link');
-    footerLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
+            const targetId = link.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
-                // Убираем активный класс со всех ссылок в навигации
-                const navLinks = document.querySelectorAll('.header__nav-link');
-                navLinks.forEach(navLink => navLink.classList.remove('header__nav-link--active'));
+                const headerHeight = header.offsetHeight;
+                const targetPosition = targetSection.offsetTop - headerHeight;
                 
-                // Добавляем активный класс к соответствующей ссылке в навигации
-                const activeNavLink = document.querySelector(`[href="#${targetId}"]`);
-                if (activeNavLink) {
-                    activeNavLink.classList.add('header__nav-link--active');
-                }
-                
-                // Плавная прокрутка к секции
-                targetSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
                 });
             }
         });
     });
-}); 
+};
+
+// Анимации при скролле
+const initScrollAnimations = () => {
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+                
+                // Добавление анимаций для разных элементов
+                if (entry.target.classList.contains('catalog__card')) {
+                    entry.target.style.animationDelay = `${Math.random() * 0.5}s`;
+                }
+            }
+        });
+    }, observerOptions);
+
+    // Наблюдение за элементами
+    const animatedElements = document.querySelectorAll('.scroll-animate, .catalog__card, .advantages__card, .reviews__card, .news__card');
+    animatedElements.forEach(el => observer.observe(el));
+};
+
+// Параллакс эффект
+const initParallaxEffect = () => {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.5;
+        
+        if (scrolled <= window.innerHeight) {
+            hero.style.transform = `translateY(${rate}px)`;
+        }
+    });
+};
+
+// Валидация форм
+const initFormValidation = () => {
+    const contactForm = document.querySelector('.contact__form');
+    if (!contactForm) return;
+
+    const inputs = contactForm.querySelectorAll('input, textarea');
+    
+    inputs.forEach(input => {
+        // Добавление стилей при фокусе
+        input.addEventListener('focus', () => {
+            input.parentElement.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', () => {
+            input.parentElement.classList.remove('focused');
+            validateField(input);
+        });
+        
+        // Валидация в реальном времени
+        input.addEventListener('input', () => {
+            if (input.classList.contains('error')) {
+                validateField(input);
+            }
+        });
+    });
+
+    // Обработка отправки формы
+    contactForm.addEventListener('submit', handleFormSubmit);
+};
+
+const validateField = (field) => {
+    const value = field.value.trim();
+    let isValid = true;
+    let errorMessage = '';
+
+    // Удаление предыдущих ошибок
+    field.classList.remove('error');
+    const existingError = field.parentElement.querySelector('.error-message');
+    if (existingError) {
+        existingError.remove();
+    }
+
+    // Валидация по типу поля
+    switch (field.type) {
+        case 'email':
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                isValid = false;
+                errorMessage = 'Введите корректный email';
+            }
+            break;
+            
+        case 'tel':
+            const phoneRegex = /^[\+]?[0-9\s\-\(\)]{10,}$/;
+            if (value && !phoneRegex.test(value)) {
+                isValid = false;
+                errorMessage = 'Введите корректный номер телефона';
+            }
+            break;
+            
+        default:
+            if (field.hasAttribute('required') && !value) {
+                isValid = false;
+                errorMessage = 'Это поле обязательно для заполнения';
+            }
+    }
+
+    // Отображение ошибки
+    if (!isValid) {
+        field.classList.add('error');
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'error-message';
+        errorDiv.textContent = errorMessage;
+        errorDiv.style.color = 'var(--color-error)';
+        errorDiv.style.fontSize = 'var(--font-size-sm)';
+        errorDiv.style.marginTop = 'var(--spacing-xs)';
+        field.parentElement.appendChild(errorDiv);
+    }
+
+    return isValid;
+};
+
+const handleFormSubmit = (e) => {
+    e.preventDefault();
+    
+    const form = e.target;
+    const inputs = form.querySelectorAll('input, textarea');
+    let isFormValid = true;
+
+    // Валидация всех полей
+    inputs.forEach(input => {
+        if (!validateField(input)) {
+            isFormValid = false;
+        }
+    });
+
+    if (isFormValid) {
+        // Показ успешного сообщения
+        showSuccessMessage(form);
+        
+        // Сброс формы
+        form.reset();
+        
+        // Удаление классов фокуса
+        inputs.forEach(input => {
+            input.parentElement.classList.remove('focused');
+        });
+    }
+};
+
+const showSuccessMessage = (form) => {
+    const successDiv = document.createElement('div');
+    successDiv.className = 'success-message';
+    successDiv.innerHTML = `
+        <div style="
+            background: var(--color-success);
+            color: white;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-top: var(--spacing-md);
+            text-align: center;
+            font-weight: var(--font-weight-medium);
+        ">
+            ✅ Сообщение успешно отправлено! Мы свяжемся с вами в ближайшее время.
+        </div>
+    `;
+    
+    form.appendChild(successDiv);
+    
+    // Удаление сообщения через 5 секунд
+    setTimeout(() => {
+        successDiv.remove();
+    }, 5000);
+};
+
+// Дополнительные утилиты
+const debounce = (func, wait) => {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+};
+
+// Оптимизация производительности
+const throttledScrollHandler = debounce(() => {
+    // Обработка скролла с ограничением частоты
+}, 16);
+
+// Экспорт функций для использования в других модулях
+window.IRVEZTECH = {
+    toggleMobileMenu,
+    openMobileMenu,
+    closeMobileMenu,
+    validateField,
+    handleFormSubmit
+}; 
