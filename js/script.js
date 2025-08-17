@@ -44,6 +44,27 @@ const initMobileMenu = () => {
             closeMobileMenu();
         }
     });
+
+    // Закрытие меню при нажатии Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && isMobileMenuOpen) {
+            closeMobileMenu();
+        }
+    });
+
+    // Закрытие меню при изменении ориентации экрана
+    window.addEventListener('orientationchange', () => {
+        if (isMobileMenuOpen) {
+            closeMobileMenu();
+        }
+    });
+
+    // Закрытие меню при изменении размера окна
+    window.addEventListener('resize', () => {
+        if (isMobileMenuOpen && window.innerWidth > 1260) {
+            closeMobileMenu();
+        }
+    });
 };
 
 const toggleMobileMenu = () => {
@@ -62,18 +83,34 @@ const openMobileMenu = () => {
     mobileMenu.classList.add('header__mobile-menu--active');
     document.body.style.overflow = 'hidden';
     
-    // Анимация появления пунктов меню
+    // Добавляем класс для body
+    document.body.classList.add('mobile-menu-open');
+    
+    // Анимация появления пунктов меню с задержкой
     const menuItems = mobileMenu.querySelectorAll('.header__mobile-menu-link');
     if (menuItems && menuItems.length > 0) {
         menuItems.forEach((item, index) => {
             item.style.opacity = '0';
-            item.style.transform = 'translateY(20px)';
-            setTimeout(() => {
-                item.style.transition = 'all 0.3s ease';
-                item.style.opacity = '1';
-                item.style.transform = 'translateY(0)';
-            }, index * 100);
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'none';
+            
+            // Используем requestAnimationFrame для плавной анимации
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    item.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, index * 80); // Уменьшаем задержку для более быстрого появления
+            });
         });
+    }
+
+    // Добавляем анимацию для кнопки
+    if (mobileBtn) {
+        mobileBtn.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+            mobileBtn.style.transform = 'scale(1)';
+        }, 150);
     }
 };
 
@@ -84,15 +121,37 @@ const closeMobileMenu = () => {
     mobileBtn.classList.remove('header__mobile-btn--active');
     mobileMenu.classList.remove('header__mobile-menu--active');
     document.body.style.overflow = '';
+    document.body.classList.remove('mobile-menu-open');
     
-    // Сброс анимации
+    // Анимация исчезновения пунктов меню
     const menuItems = mobileMenu.querySelectorAll('.header__mobile-menu-link');
     if (menuItems && menuItems.length > 0) {
-        menuItems.forEach(item => {
-            item.style.opacity = '';
-            item.style.transform = '';
-            item.style.transition = '';
+        menuItems.forEach((item, index) => {
+            setTimeout(() => {
+                item.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(-20px)';
+            }, index * 30); // Быстрое исчезновение
         });
+    }
+
+    // Сброс анимации через некоторое время
+    setTimeout(() => {
+        if (menuItems && menuItems.length > 0) {
+            menuItems.forEach(item => {
+                item.style.opacity = '';
+                item.style.transform = '';
+                item.style.transition = '';
+            });
+        }
+    }, 500);
+
+    // Анимация для кнопки
+    if (mobileBtn) {
+        mobileBtn.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+            mobileBtn.style.transform = 'scale(1)';
+        }, 150);
     }
 };
 
