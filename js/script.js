@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initParallaxEffect();
     initFormValidation();
+    initAboutSlider();
 });
 
 // Мобильное меню
@@ -396,11 +397,105 @@ const throttledScrollHandler = debounce(() => {
     // Обработка скролла с ограничением частоты
 }, 16);
 
+// Инициализация слайдера "О компании"
+const initAboutSlider = () => {
+    const aboutSlider = document.querySelector('.about__slider');
+    if (!aboutSlider) return;
+
+    const slides = aboutSlider.querySelectorAll('.about__slide');
+    const dots = aboutSlider.querySelectorAll('.about__slider-dot');
+    const prevBtn = aboutSlider.querySelector('.about__slider-btn--prev');
+    const nextBtn = aboutSlider.querySelector('.about__slider-btn--next');
+    
+    if (!slides.length || !dots.length || !prevBtn || !nextBtn) return;
+
+    let currentSlide = 0;
+    let autoplayInterval;
+
+    // Функция показа слайда
+    const showSlide = (index) => {
+        // Скрываем все слайды
+        slides.forEach(slide => {
+            slide.classList.remove('about__slide--active');
+        });
+        
+        // Убираем активный класс со всех точек
+        dots.forEach(dot => {
+            dot.classList.remove('about__slider-dot--active');
+        });
+        
+        // Показываем нужный слайд
+        if (slides[index]) {
+            slides[index].classList.add('about__slide--active');
+        }
+        
+        // Активируем нужную точку
+        if (dots[index]) {
+            dots[index].classList.add('about__slider-dot--active');
+        }
+        
+        currentSlide = index;
+    };
+
+    // Функция следующего слайда
+    const nextSlide = () => {
+        const nextIndex = (currentSlide + 1) % slides.length;
+        showSlide(nextIndex);
+    };
+
+    // Функция предыдущего слайда
+    const prevSlide = () => {
+        const prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prevIndex);
+    };
+
+    // Обработчики для кнопок
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    // Обработчики для точек
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            showSlide(index);
+        });
+    });
+
+    // Автопрокрутка
+    const startAutoplay = () => {
+        autoplayInterval = setInterval(nextSlide, 5000);
+    };
+
+    const stopAutoplay = () => {
+        if (autoplayInterval) {
+            clearInterval(autoplayInterval);
+        }
+    };
+
+    // Пауза при наведении
+    aboutSlider.addEventListener('mouseenter', stopAutoplay);
+    aboutSlider.addEventListener('mouseleave', startAutoplay);
+
+    // Запускаем автопрокрутку
+    startAutoplay();
+
+    // Обработка клавиатуры
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            prevSlide();
+        } else if (e.key === 'ArrowRight') {
+            nextSlide();
+        }
+    });
+
+    console.log('About slider initialized');
+};
+
 // Экспорт функций для использования в других модулях
 window.IRVEZTECH = {
     toggleMobileMenu,
     openMobileMenu,
     closeMobileMenu,
     validateField,
-    handleFormSubmit
+    handleFormSubmit,
+    initAboutSlider
 }; 
