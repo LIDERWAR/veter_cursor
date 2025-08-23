@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initParallaxEffect();
     initFormValidation();
     initAboutSlider();
+    initImageGallery();
 });
 
 // Мобильное меню
@@ -490,6 +491,160 @@ const initAboutSlider = () => {
     console.log('About slider initialized');
 };
 
+// Инициализация галереи изображений
+const initImageGallery = () => {
+    const modal = document.getElementById('imageModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeBtn = document.querySelector('.image-modal__close');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const currentIndexSpan = document.getElementById('currentImageIndex');
+    const totalImagesSpan = document.getElementById('totalImages');
+    
+    if (!modal || !modalImage || !closeBtn) return;
+
+    let currentImageIndex = 0;
+    let galleryImages = [];
+    
+    // Получаем все изображения из галереи текущей страницы
+    const galleryItems = document.querySelectorAll('.model-gallery-item img');
+    if (galleryItems.length === 0) return;
+    
+    galleryImages = Array.from(galleryItems).map(img => ({
+        src: img.src,
+        alt: img.alt
+    }));
+    
+    // Обновляем счетчик общего количества изображений
+    if (totalImagesSpan) {
+        totalImagesSpan.textContent = galleryImages.length;
+    }
+    
+    // Функция открытия модального окна
+    const openModal = (index) => {
+        currentImageIndex = index;
+        updateModalImage();
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+        
+        // Анимация появления
+        setTimeout(() => {
+            modal.style.opacity = '1';
+        }, 10);
+    };
+    
+    // Функция закрытия модального окна
+    const closeModal = () => {
+        modal.style.opacity = '0';
+        setTimeout(() => {
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+        }, 300);
+    };
+    
+    // Функция обновления изображения в модальном окне
+    const updateModalImage = () => {
+        if (galleryImages[currentImageIndex]) {
+            modalImage.src = galleryImages[currentImageIndex].src;
+            modalImage.alt = galleryImages[currentImageIndex].alt;
+            
+            // Обновляем счетчик текущего изображения
+            if (currentIndexSpan) {
+                currentIndexSpan.textContent = currentImageIndex + 1;
+            }
+        }
+    };
+    
+    // Функция показа следующего изображения
+    const showNextImage = () => {
+        currentImageIndex = (currentImageIndex + 1) % galleryImages.length;
+        updateModalImage();
+    };
+    
+    // Функция показа предыдущего изображения
+    const showPrevImage = () => {
+        currentImageIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+        updateModalImage();
+    };
+    
+    // Обработчики событий для изображений галереи
+    galleryItems.forEach((img, index) => {
+        img.addEventListener('click', () => {
+            openModal(index);
+        });
+        
+        // Добавляем курсор pointer для изображений
+        img.style.cursor = 'pointer';
+    });
+    
+    // Обработчики для модального окна
+    closeBtn.addEventListener('click', closeModal);
+    
+    // Закрытие по клику вне изображения
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Закрытие по клавише Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('show')) {
+            closeModal();
+        }
+    });
+    
+    // Навигация по изображениям
+    if (prevBtn) {
+        prevBtn.addEventListener('click', showPrevImage);
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', showNextImage);
+    }
+    
+    // Навигация по клавишам
+    document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('show')) return;
+        
+        if (e.key === 'ArrowLeft') {
+            showPrevImage();
+        } else if (e.key === 'ArrowRight') {
+            showNextImage();
+        }
+    });
+    
+    // Свайп для мобильных устройств
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    modal.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    modal.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+    
+    const handleSwipe = () => {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Свайп влево - следующее изображение
+                showNextImage();
+            } else {
+                // Свайп вправо - предыдущее изображение
+                showPrevImage();
+            }
+        }
+    };
+    
+    console.log('Image gallery initialized with', galleryImages.length, 'images');
+};
+
 // Экспорт функций для использования в других модулях
 window.IRVEZTECH = {
     toggleMobileMenu,
@@ -497,5 +652,6 @@ window.IRVEZTECH = {
     closeMobileMenu,
     validateField,
     handleFormSubmit,
-    initAboutSlider
+    initAboutSlider,
+    initImageGallery
 }; 
