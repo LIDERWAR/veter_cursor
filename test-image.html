@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест изображения</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .test-image {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #333;
+            margin: 20px 0;
+        }
+        .hero-test {
+            width: 100%;
+            height: 400px;
+            background-image: url('assets/img/PILOT/image (10).png');
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #333;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Тест изображения image (10).png</h1>
+    
+    <h2>1. Прямое отображение изображения:</h2>
+    <img src="assets/img/PILOT/image (10).png" alt="Тест изображения" class="test-image">
+    
+    <h2>2. Как фоновое изображение (как на странице PILOT):</h2>
+    <div class="hero-test"></div>
+    
+    <h2>3. Проверка пути к файлу:</h2>
+    <p>Путь: assets/img/PILOT/image (10).png</p>
+    
+    <script>
+        // Проверка загрузки изображения
+        const img = new Image();
+        img.onload = function() {
+            console.log('Изображение успешно загружено');
+            document.body.innerHTML += '<p style="color: green;">✅ Изображение загружено успешно!</p>';
+        };
+        img.onerror = function() {
+            console.log('Ошибка загрузки изображения');
+            document.body.innerHTML += '<p style="color: red;">❌ Ошибка загрузки изображения!</p>';
+        };
+        img.src = 'assets/img/PILOT/image (10).png';
+    </script>
+</body>
+</html>
