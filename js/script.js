@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initFormValidation();
     initAboutSlider();
     initImageGallery();
+    initCalculator();
 });
 
 // Мобильное меню
@@ -645,6 +646,101 @@ const initImageGallery = () => {
     console.log('Image gallery initialized with', galleryImages.length, 'images');
 };
 
+// Калькулятор цены
+const initCalculator = () => {
+    const calculator = document.querySelector('.calculator');
+    if (!calculator) return;
+
+    const basePriceElement = document.getElementById('basePrice');
+    const optionsPriceElement = document.getElementById('optionsPrice');
+    const finalPriceElement = document.getElementById('finalPrice');
+    const orderBtn = document.querySelector('.calculator__order-btn');
+
+    // Базовая стоимость (шины Форестер 1370)
+    const BASE_PRICE = 2700000;
+
+    // Обновление цен
+    const updatePrices = () => {
+        let totalOptionsPrice = 0;
+        let tirePrice = BASE_PRICE;
+
+        // Подсчет стоимости шин
+        const tireRadio = calculator.querySelector('input[name="tires"]:checked');
+        if (tireRadio) {
+            tirePrice = BASE_PRICE + parseInt(tireRadio.value) || BASE_PRICE;
+        }
+
+        // Подсчет выбранных опций (исключая шины)
+        const checkboxes = calculator.querySelectorAll('input[type="checkbox"]:checked');
+        const otherRadioButtons = calculator.querySelectorAll('input[type="radio"]:not([name="tires"]):checked');
+
+        checkboxes.forEach(checkbox => {
+            totalOptionsPrice += parseInt(checkbox.value) || 0;
+        });
+
+        otherRadioButtons.forEach(radio => {
+            totalOptionsPrice += parseInt(radio.value) || 0;
+        });
+
+        const finalPrice = tirePrice + totalOptionsPrice;
+
+        // Форматирование чисел с пробелами
+        const formatPrice = (price) => {
+            return price.toLocaleString('ru-RU') + ' ₽';
+        };
+
+        // Обновление элементов
+        if (basePriceElement) basePriceElement.textContent = formatPrice(tirePrice);
+        if (optionsPriceElement) optionsPriceElement.textContent = formatPrice(totalOptionsPrice);
+        if (finalPriceElement) finalPriceElement.textContent = formatPrice(finalPrice);
+    };
+
+    // Обработчики событий для всех input элементов
+    const inputs = calculator.querySelectorAll('input[type="checkbox"], input[type="radio"]');
+    inputs.forEach(input => {
+        input.addEventListener('change', updatePrices);
+    });
+
+    // Обработчик кнопки заказа
+    if (orderBtn) {
+        orderBtn.addEventListener('click', () => {
+            const selectedOptions = [];
+            
+            // Сбор выбранных опций
+            const checkboxes = calculator.querySelectorAll('input[type="checkbox"]:checked');
+            const allRadioButtons = calculator.querySelectorAll('input[type="radio"]:checked');
+
+            checkboxes.forEach(checkbox => {
+                const optionText = checkbox.closest('.calculator__option').querySelector('.calculator__option-text').textContent;
+                const optionPrice = checkbox.closest('.calculator__option').querySelector('.calculator__option-price').textContent;
+                selectedOptions.push(`${optionText} - ${optionPrice}`);
+            });
+
+            allRadioButtons.forEach(radio => {
+                const optionText = radio.closest('.calculator__option').querySelector('.calculator__option-text').textContent;
+                const optionPrice = radio.closest('.calculator__option').querySelector('.calculator__option-price').textContent;
+                selectedOptions.push(`${optionText} - ${optionPrice}`);
+            });
+
+            // Создание сообщения для отправки
+            const finalPrice = finalPriceElement ? finalPriceElement.textContent : '2 700 000 ₽';
+            const message = `Заказ снегоболотохода "Ветер"\n\nИтоговая стоимость: ${finalPrice}\n\nВыбранные опции:\n${selectedOptions.join('\n')}\n\nСвяжитесь со мной для оформления заказа.`;
+
+            // Создание ссылки WhatsApp
+            const phoneNumber = '73952999999'; // Номер телефона без +7
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Открытие WhatsApp
+            window.open(whatsappUrl, '_blank');
+        });
+    }
+
+    // Инициализация цен
+    updatePrices();
+
+    console.log('Calculator initialized');
+};
+
 // Экспорт функций для использования в других модулях
 window.IRVEZTECH = {
     toggleMobileMenu,
@@ -653,5 +749,6 @@ window.IRVEZTECH = {
     validateField,
     handleFormSubmit,
     initAboutSlider,
-    initImageGallery
+    initImageGallery,
+    initCalculator
 }; 
