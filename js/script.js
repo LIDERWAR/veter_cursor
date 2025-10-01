@@ -189,19 +189,34 @@ const initScrollEffects = () => {
 const initSmoothScrolling = () => {
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                const headerHeight = header.offsetHeight;
+            const href = link.getAttribute('href');
+            if (!href) return;
+
+            let url;
+            try {
+                url = new URL(href, window.location.href);
+            } catch {
+                return;
+            }
+
+            const isSamePage = url.origin === window.location.origin && url.pathname === window.location.pathname;
+            const hash = url.hash;
+
+            if (hash && isSamePage) {
+                const targetSection = document.querySelector(hash);
+                if (!targetSection) return;
+
+                e.preventDefault();
+
+                const headerHeight = header ? header.offsetHeight : 0;
                 const targetPosition = targetSection.offsetTop - headerHeight;
-                
+
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
                 });
             }
+            // Переходы на другие страницы (например, index.html#about) не перехватываем
         });
     });
 };
