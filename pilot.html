@@ -143,6 +143,12 @@
                                         Галерея
                                     </a>
                                 </li>
+                                <li class="model-info__nav-item">
+                                    <a href="#calculator" class="model-info__nav-link">
+                                        <span class="model-info__nav-icon">🧮</span>
+                                        Калькулятор цены
+                                    </a>
+                                </li>
                             </ul>
                         </nav>
                     </aside>
@@ -345,6 +351,365 @@
                                 </div>
                                 <div class="model-gallery-item">
                                     <img src="assets/img/PILOT/image (1).png" alt="Снегоболотоход Пилот на полевой дороге" class="model-gallery-image">
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <!-- Секция калькулятора цены -->
+                        <section id="calculator" class="model-info__section">
+                            <h2 class="model-info__section-title">Калькулятор цены сборки</h2>
+                            <div class="calculator">
+                                <div class="calculator__header">
+                                    <p class="calculator__description">
+                                        Выберите дополнительные опции для вашего снегоболотохода "Пилот" и узнайте итоговую стоимость сборки.
+                                    </p>
+                                </div>
+                                
+                                <div class="calculator__content">
+                                    <div class="calculator__options">
+                                        <!-- Шины -->
+                                        <div class="calculator__category">
+                                            <h3 class="calculator__category-title">Шины</h3>
+                                            <div class="calculator__options-grid">
+                                                <label class="calculator__option">
+                                                    <input type="radio" name="tires" value="0" class="calculator__option-input" checked>
+                                                    <span class="calculator__option-text">Шины Форестер 1370</span>
+                                                    <span class="calculator__option-price">2 700 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="radio" name="tires" value="100000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Шины Форестер 1470</span>
+                                                    <span class="calculator__option-price">2 800 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="radio" name="tires" value="200000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Шины Форестер 1650</span>
+                                                    <span class="calculator__option-price">2 900 000 ₽</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Кузов и внешний вид -->
+                                        <div class="calculator__category">
+                                            <h3 class="calculator__category-title">Кузов и внешний вид</h3>
+                                            <div class="calculator__options-grid">
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="camouflage" value="25000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Покраска в камуфляж</span>
+                                                    <span class="calculator__option-price">25 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="rear_trunk" value="25000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Багажник в задней секции</span>
+                                                    <span class="calculator__option-price">25 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="kangaroo" value="30000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Кенгурин</span>
+                                                    <span class="calculator__option-price">30 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="high_roof" value="25000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Высокая крыша (+25 см.) в передней секции</span>
+                                                    <span class="calculator__option-price">25 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="rear_hatch" value="20000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Люк в задней секции</span>
+                                                    <span class="calculator__option-price">20 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="corrugation" value="25000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Гофра между секциями с козырьком от затекания воды</span>
+                                                    <span class="calculator__option-price">25 000 ₽</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Освещение -->
+                                        <div class="calculator__category">
+                                            <h3 class="calculator__category-title">Освещение</h3>
+                                            <div class="calculator__options-grid">
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="led_bar" value="20000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">LED-балка (с установкой)</span>
+                                                    <span class="calculator__option-price">20 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="led_wiring" value="10000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Проводка под LED-балку</span>
+                                                    <span class="calculator__option-price">10 000 ₽</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Камеры и мониторы -->
+                                        <div class="calculator__category">
+                                            <h3 class="calculator__category-title">Камеры и мониторы</h3>
+                                            <div class="calculator__options-grid">
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="rear_camera" value="15000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Камера заднего хода (с установкой)</span>
+                                                    <span class="calculator__option-price">15 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="monitor" value="10000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Монитор (с установкой)</span>
+                                                    <span class="calculator__option-price">10 000 ₽</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Аудиосистема -->
+                                        <div class="calculator__category">
+                                            <h3 class="calculator__category-title">Аудиосистема</h3>
+                                            <div class="calculator__options-grid">
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="radio_install" value="15000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Монтаж магнитолы + АС</span>
+                                                    <span class="calculator__option-price">15 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="speaker_panels" value="5000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Панели под динамик (2шт.)</span>
+                                                    <span class="calculator__option-price">5 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="speakers_15" value="7000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Динамик 15" 2шт.</span>
+                                                    <span class="calculator__option-price">7 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="speaker_panel_15" value="16000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Панель для динамика 2шт.</span>
+                                                    <span class="calculator__option-price">16 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="android_radio" value="20000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Магнитола Android</span>
+                                                    <span class="calculator__option-price">20 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="radio_panel" value="15000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Панель для магнитолы</span>
+                                                    <span class="calculator__option-price">15 000 ₽</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Тормозная система -->
+                                        <div class="calculator__category">
+                                            <h3 class="calculator__category-title">Тормозная система</h3>
+                                            <div class="calculator__options-grid">
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="disc_brakes" value="30000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Дисковые тормоза</span>
+                                                    <span class="calculator__option-price">30 000 ₽</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Электрооборудование -->
+                                        <div class="calculator__category">
+                                            <h3 class="calculator__category-title">Электрооборудование</h3>
+                                            <div class="calculator__options-grid">
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="additional_battery" value="20000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Дополнительный АКБ с дублированием бортовой сети</span>
+                                                    <span class="calculator__option-price">20 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="liquid_heater" value="20000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Жидкостный отопитель в задней секции</span>
+                                                    <span class="calculator__option-price">20 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="diesel_heater_front" value="35000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Автономный дизельный отопитель салона 2 кВт. (перед)</span>
+                                                    <span class="calculator__option-price">35 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="diesel_heater_rear" value="35000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Автономный дизельный отопитель салона 2 кВт. (зад)</span>
+                                                    <span class="calculator__option-price">35 000 ₽</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Аксессуары -->
+                                        <div class="calculator__category">
+                                            <h3 class="calculator__category-title">Аксессуары</h3>
+                                            <div class="calculator__options-grid">
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="jerry_cans_with" value="35000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Крепление канистр к кузову + 2 канистры</span>
+                                                    <span class="calculator__option-price">35 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="jerry_cans_without" value="25000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Крепление канистр к кузову (без канистр)</span>
+                                                    <span class="calculator__option-price">25 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="tools_mount" value="12000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Крепление топора и лопаты (4 шт.)</span>
+                                                    <span class="calculator__option-price">12 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="eva_mats" value="10000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">EVA-коврики (передняя + задняя секции)</span>
+                                                    <span class="calculator__option-price">10 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="sleeping_platforms_front" value="15000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Комплект сланей для сна (передняя секция)</span>
+                                                    <span class="calculator__option-price">15 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="sleeping_platforms_rear" value="25000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Комплект сланей для сна (задняя секция)</span>
+                                                    <span class="calculator__option-price">25 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="plastic_pockets" value="2000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Карманы пластиковые заводские (1 шт.)</span>
+                                                    <span class="calculator__option-price">2 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="roof_ladder" value="25000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Лестница на крышу задней секции, складная</span>
+                                                    <span class="calculator__option-price">25 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="side_windows_rear" value="25000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Боковые раздвижные окна в задней секции</span>
+                                                    <span class="calculator__option-price">25 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="side_windows_front" value="25000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Боковые раздвижные окна в передней секции</span>
+                                                    <span class="calculator__option-price">25 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="arch_extenders_pnd" value="10000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Расширители арок ПНД</span>
+                                                    <span class="calculator__option-price">10 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="arch_extenders_metal" value="20000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Расширители арок металл</span>
+                                                    <span class="calculator__option-price">20 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="wing_chests" value="18000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Рундуки под крылья (2шт.)</span>
+                                                    <span class="calculator__option-price">18 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="snorkel" value="8000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Шноркель</span>
+                                                    <span class="calculator__option-price">8 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="tow_hitch" value="15000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Фаркоп</span>
+                                                    <span class="calculator__option-price">15 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="low_pressure_gauge" value="8000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Манометр сверхнизкого давления</span>
+                                                    <span class="calculator__option-price">8 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="door_lock" value="7000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Замок на дверь (1шт.)</span>
+                                                    <span class="calculator__option-price">7 000 ₽</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Лебедка -->
+                                        <div class="calculator__category">
+                                            <h3 class="calculator__category-title">Лебедка</h3>
+                                            <div class="calculator__options-grid">
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="winch_prep" value="10000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Подготовка под лебедку (перед+зад)</span>
+                                                    <span class="calculator__option-price">10 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="winch_wiring" value="13000" class="calculator__option-input">
+                                                    <span class="calculatorٔ�ption-text">Проводка для лебедки (перед+зад)</span>
+                                                    <span class="calculator__option-price">13 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="radio" name="winch" value="0" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Лебедка переносная (перед+зад) усилие 3500 Lbs.</span>
+                                                    <span class="calculator__option-price">50 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="radio" name="winch" value="15000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Лебедка переносная (перед+зад) усилие 4500 Lbs.</span>
+                                                    <span class="calculator__option-price">65 000 ₽</span>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- Дополнительное оборудование -->
+                                        <div class="calculator__category">
+                                            <h3 class="calculator__category-title">Дополнительное оборудование</h3>
+                                            <div class="calculator__options-grid">
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="additional_fuel_pump" value="10000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Дополнительный топливный насос</span>
+                                                    <span class="calculator__option-price">10 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="diff_lock_first" value="77000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Блокировка межколесного дифференциала (одна ось) с установкой</span>
+                                                    <span class="calculator__option-price">77 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="diff_lock_second" value="77000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Блокировка межколесного дифференциала (вторая ось) с установкой</span>
+                                                    <span class="calculator__option-price">77 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="engine_heater" value="60000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Предпусковой подогреватель двигателя</span>
+                                                    <span class="calculator__option-price">60 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="pneumatic_suspension" value="100000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Пневмоподвеска</span>
+                                                    <span class="calculator__option-price">100 000 ₽</span>
+                                                </label>
+                                                <label class="calculator__option">
+                                                    <input type="checkbox" name="central_inflation" value="150000" class="calculator__option-input">
+                                                    <span class="calculator__option-text">Центральная подкачка</span>
+                                                    <span class="calculator__option-price">150 000 ₽</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="calculator__result">
+                                        <div class="calculator__total">
+                                            <div class="calculator__total-item">
+                                                <span class="calculator__total-label">Базовая стоимость:</span>
+                                                <span class="calculator__total-value" id="basePrice">2 700 000 ₽</span>
+                                            </div>
+                                            <div class="calculator__total-item">
+                                                <span class="calculator__total-label">Дополнительные опции:</span>
+                                                <span class="calculator__total-value" id="optionsPrice">0 ₽</span>
+                                            </div>
+                                            <div class="calculator__total-item calculator__total-item--final">
+                                                <span class="calculator__total-label">Итого:</span>
+                                                <span class="calculator__total-value" id="finalPrice">2 700 000 ₽</span>
+                                            </div>
+                                        </div>
+                                        <button class="calculator__order-btn">Оформить заказ</button>
+                                    </div>
                                 </div>
                             </div>
                         </section>
