@@ -1944,6 +1944,61 @@ a.catalog__btn {
     color: #e55a00;
 }
 
+/* Team Section */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-2xl);
+    margin-top: var(--spacing-2xl);
+}
+
+.team-card {
+    background-color: var(--color-bg-primary);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-normal);
+    text-align: center;
+}
+
+.team-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+.team-card__image-wrapper {
+    height: 250px;
+    overflow: hidden;
+}
+
+.team-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-normal);
+}
+
+.team-card:hover .team-card__image {
+    transform: scale(1.05);
+}
+
+.team-card__content {
+    padding: var(--spacing-xl);
+}
+
+.team-card__name {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    margin: 0 0 var(--spacing-sm) 0;
+    color: var(--color-text-primary);
+}
+
+.team-card__title {
+    font-size: var(--font-size-base);
+    color: var(--color-primary);
+    margin: 0;
+}
+
 /* Contact Section */
 .contact {
     padding: var(--spacing-4xl) 0;
@@ -2869,12 +2924,7 @@ body.mobile-menu-open {
 }
 
 @media (max-width: 768px) {
-    .about,
-    .catalog,
-    .advantages,
-    .reviews,
-    .news,
-    .contact {
+    .about, .catalog, .advantages, .reviews, .news, .contact {
         padding: 60px 0;
     }
     
@@ -3089,12 +3139,7 @@ body.mobile-menu-open {
 }
 
 @media (max-width: 480px) {
-    .about,
-    .catalog,
-    .advantages,
-    .reviews,
-    .news,
-    .contact {
+    .about, .catalog, .advantages, .reviews, .news, .contact {
         padding: 40px 0;
     }
     
@@ -3210,6 +3255,223 @@ body.mobile-menu-open {
 }
 
 /* Дополнительная адаптация для очень маленьких экранов */
+@media (max-width: 360px) {
+    .reviews__grid {
+        gap: var(--spacing-md, 16px);
+        padding: 0 var(--spacing-xs, 4px);
+        max-width: 450px;
+        margin: 0 auto;
+    }
+    
+    .reviews__card {
+        padding: 16px;
+        border-left-width: 2px;
+    }
+    
+    .reviews__text {
+        font-size: 13px;
+        margin-bottom: 16px;
+        line-height: 1.4;
+    }
+    
+    .reviews__author-name {
+        font-size: 15px;
+        margin-bottom: 3px;
+    }
+    
+    .reviews__author-position {
+        font-size: 11px;
+    }
+    
+    /* News адаптация для очень маленьких экранов */
+    .news__grid {
+        gap: var(--spacing-md, 16px);
+        padding: 0 var(--spacing-xs, 4px);
+        max-width: 450px;
+        margin: 0 auto;
+    }
+}
+
+/* Планшеты */
+@media (max-width: 768px) {
+    .catalog__card {
+        flex-direction: column;
+        height: auto;
+        min-height: auto;
+    }
+    
+    .catalog__image-wrapper {
+        height: 250px;
+        width: 100%;
+        order: 1;
+    }
+    
+    .catalog__content {
+        padding: 25px;
+        width: 100%;
+        order: 2;
+        align-items: flex-start;
+        text-align: left;
+    }
+    
+    .catalog__card-title {
+        font-size: 22px;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+    
+    .catalog__card-description {
+        font-size: 15px;
+        margin-bottom: 18px;
+        text-align: left;
+    }
+    
+    .catalog__specs {
+        gap: var(--spacing-md, 16px);
+        margin-bottom: 20px;
+    }
+    
+    .catalog__spec {
+        text-align: left;
+        align-items: flex-start;
+    }
+    
+    .catalog__btn {
+        align-self: flex-start;
+    }
+}
+
+/* Мобильные устройства */
+@media (max-width: 480px) {
+    .catalog__single-card {
+        max-width: 100%;
+        margin: 0 0 var(--spacing-lg, 24px) 0;
+    }
+    
+    .catalog__single-card:last-child {
+        margin-bottom: 0;
+    }
+    
+    .catalog__card {
+        border-radius: var(--radius-md, 8px);
+        flex-direction: column;
+        height: auto;
+        min-height: auto;
+    }
+    
+    .catalog__image-wrapper {
+        height: 200px;
+        width: 100%;
+        order: 1;
+        display: flex;
+        align-items: stretch;
+        position: relative;
+    }
+    
+    .catalog__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .catalog__content {
+        padding: 18px;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        order: 2;
+    }
+    
+    .catalog__card-title {
+        font-size: 18px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    
+    .catalog__card-description {
+        font-size: 14px;
+        margin-bottom: 14px;
+        text-align: center;
+    }
+    
+    .catalog__specs {
+        gap: var(--spacing-sm, 8px);
+        justify-content: space-between;
+        flex-direction: row;
+        margin-bottom: 18px;
+    }
+    
+    .catalog__spec {
+        text-align: center;
+        align-items: center;
+        flex: 1;
+    }
+    
+    .catalog__spec-value {
+        font-size: 16px;
+    }
+    
+    .catalog__spec-label {
+        font-size: 9px;
+    }
+    
+    .catalog__btn {
+        padding: 10px 18px;
+        font-size: 13px;
+        align-self: center;
+    }
+}
+
+/* Footer адаптация для мобильных устройств */
+@media (max-width: 480px) {
+    .footer {
+        padding: 30px 0 15px;
+    }
+    
+    .footer__content {
+        gap: 25px;
+    }
+    
+    .footer__main {
+        gap: 25px;
+    }
+    
+    .footer__links {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .footer__column-title {
+        font-size: 16px;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    
+    .footer__list {
+        gap: 8px;
+        align-items: center;
+    }
+    
+    .footer__link {
+        font-size: 14px;
+        text-align: center;
+    }
+    
+    .footer__contact {
+        font-size: 14px;
+        text-align: center;
+    }
+    
+    .footer__bottom {
+        padding-top: 20px;
+    }
+    
+    .footer__copyright {
+        font-size: 12px;
+    }
+}
+
+/* Очень маленькие экраны */
 @media (max-width: 360px) {
     .reviews__grid {
         gap: var(--spacing-md, 16px);
@@ -3663,7 +3925,11 @@ body.mobile-menu-open {
 /* Боковая панель навигации */
 .model-info__sidebar {
     position: sticky;
-    top: 100px;
+    top: var(--sidebar-offset, 100px);
+    align-self: start;
+    height: max-content;
+    max-height: calc(100vh - var(--sidebar-offset, 100px));
+    overflow: auto;
 }
 
 .model-info__nav-list {
