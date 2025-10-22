@@ -1947,9 +1947,10 @@ a.catalog__btn {
 /* Team Section */
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 0.7fr)); /* Adjusted for 30% narrower */
     gap: var(--spacing-2xl);
     margin-top: var(--spacing-2xl);
+    justify-content: center; /* Center the grid items */
 }
 
 .team-card {
@@ -1959,6 +1960,8 @@ a.catalog__btn {
     box-shadow: var(--shadow-md);
     transition: all var(--transition-normal);
     text-align: center;
+    max-width: 70%; /* Make cards 30% narrower */
+    justify-self: center; /* Center each card within its grid cell */
 }
 
 .team-card:hover {

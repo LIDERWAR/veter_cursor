@@ -138,6 +138,47 @@
                             </div>
                         </section>
 
+                        <section id="team" class="model-info__section">
+                            <h2 class="model-info__section-title">Наша команда</h2>
+                            <div class="model-info__text-content">
+                                <p class="model-info__paragraph">
+                                    Главный актив ИРВЕЗТЕХ — это наши сотрудники. Наша команда состоит из высококвалифицированных инженеров, конструкторов, сварщиков и механиков, которые вкладывают в свою работу не только профессионализм, но и душу. Мы гордимся тем, что создаем лучшую вездеходную технику в России.
+                                </p>
+                            </div>
+                            <div class="team-grid scroll-animate">
+                                <!-- Employee Card 1 -->
+                                <div class="team-card">
+                                    <div class="team-card__image-wrapper">
+                                        <img src="assets/img/VETER/image (6).png" alt="Фото сотрудника" class="team-card__image">
+                                    </div>
+                                    <div class="team-card__content">
+                                        <h3 class="team-card__name">Алексей Иванов</h3>
+                                        <p class="team-card__title">Главный инженер</p>
+                                    </div>
+                                </div>
+                                <!-- Employee Card 2 -->
+                                <div class="team-card">
+                                    <div class="team-card__image-wrapper">
+                                        <img src="assets/img/VETER/image (7).png" alt="Фото сотрудника" class="team-card__image">
+                                    </div>
+                                    <div class="team-card__content">
+                                        <h3 class="team-card__name">Мария Петрова</h3>
+                                        <p class="team-card__title">Руководитель производства</p>
+                                    </div>
+                                </div>
+                                <!-- Employee Card 3 -->
+                                <div class="team-card">
+                                    <div class="team-card__image-wrapper">
+                                        <img src="assets/img/VETER/image (8).png" alt="Фото сотрудника" class="team-card__image">
+                                    </div>
+                                    <div class="team-card__content">
+                                        <h3 class="team-card__name">Дмитрий Сидоров</h3>
+                                        <p class="team-card__title">Ведущий конструктор</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
                         <section id="mission" class="model-info__section">
                             <h2 class="model-info__section-title">Миссия и ценности</h2>
                             <div class="model-info__text-content">
@@ -190,47 +231,6 @@
                                 </div>
                             </div>
                         </section>
-
-                        <section id="team" class="model-info__section">
-                            <h2 class="model-info__section-title">Наша команда</h2>
-                            <div class="model-info__text-content">
-                                <p class="model-info__paragraph">
-                                    Главный актив ИРВЕЗТЕХ — это наши сотрудники. Наша команда состоит из высококвалифицированных инженеров, конструкторов, сварщиков и механиков, которые вкладывают в свою работу не только профессионализм, но и душу. Мы гордимся тем, что создаем лучшую вездеходную технику в России.
-                                </p>
-                            </div>
-                            <div class="team-grid scroll-animate">
-                                <!-- Employee Card 1 -->
-                                <div class="team-card">
-                                    <div class="team-card__image-wrapper">
-                                        <img src="assets/img/VETER/image (6).png" alt="Фото сотрудника" class="team-card__image">
-                                    </div>
-                                    <div class="team-card__content">
-                                        <h3 class="team-card__name">Алексей Иванов</h3>
-                                        <p class="team-card__title">Главный инженер</p>
-                                    </div>
-                                </div>
-                                <!-- Employee Card 2 -->
-                                <div class="team-card">
-                                    <div class="team-card__image-wrapper">
-                                        <img src="assets/img/VETER/image (7).png" alt="Фото сотрудника" class="team-card__image">
-                                    </div>
-                                    <div class="team-card__content">
-                                        <h3 class="team-card__name">Мария Петрова</h3>
-                                        <p class="team-card__title">Руководитель производства</p>
-                                    </div>
-                                </div>
-                                <!-- Employee Card 3 -->
-                                <div class="team-card">
-                                    <div class="team-card__image-wrapper">
-                                        <img src="assets/img/VETER/image (8).png" alt="Фото сотрудника" class="team-card__image">
-                                    </div>
-                                    <div class="team-card__content">
-                                        <h3 class="team-card__name">Дмитрий Сидоров</h3>
-                                        <p class="team-card__title">Ведущий конструктор</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
                     </div>
                 </div>
             </div>
@@ -261,7 +261,7 @@
                                 <span class="contact__info-value">Пн-Пт: 9:00-18:00</span>
                             </div>
                         </div>
-                         <div id="map" style="width: 100%; height: 400px;"></div>
+
                     </div>
                     
                     <form class="contact__form">
@@ -335,21 +335,5 @@
     </footer>
     
     <script src="js/script.js"></script>
-    <script type="text/javascript">
-        ymaps.ready(init);
-        function init(){
-            var myMap = new ymaps.Map("map", {
-                center: [52.236, 104.33],
-                zoom: 15
-            });
-
-            var myPlacemark = new ymaps.Placemark([52.236, 104.33], {
-                hintContent: 'ИРВЕЗТЕХ',
-                balloonContent: 'г. Иркутск, ул. Промышленная, 25'
-            });
-
-            myMap.geoObjects.add(myPlacemark);
-        }
-    </script>
 </body>
 </html>
