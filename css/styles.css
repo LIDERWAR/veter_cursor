@@ -135,7 +135,6 @@ body {
     font-family: var(--font-family-primary, 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
     line-height: var(--line-height-relaxed, 1.6);
     background-color: var(--color-bg-primary, #ffffff);
-    padding-top: 70px; /* Отступ для фиксированного меню */
     color: var(--color-text-primary, #2c2c2c);
 }
 
@@ -1791,9 +1790,15 @@ a.catalog__btn {
 .reviews__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: var(--spacing-4xl);
+    gap: var(--spacing-3xl);
     position: relative;
     z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .reviews__grid {
+        gap: var(--spacing-2xl);
+    }
 }
 
 .reviews__card {
@@ -1947,10 +1952,9 @@ a.catalog__btn {
 /* Team Section */
 .team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 0.7fr)); /* Adjusted for 30% narrower */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: var(--spacing-2xl);
     margin-top: var(--spacing-2xl);
-    justify-content: center; /* Center the grid items */
 }
 
 .team-card {
@@ -1960,8 +1964,6 @@ a.catalog__btn {
     box-shadow: var(--shadow-md);
     transition: all var(--transition-normal);
     text-align: center;
-    max-width: 70%; /* Make cards 30% narrower */
-    justify-self: center; /* Center each card within its grid cell */
 }
 
 .team-card:hover {
@@ -1997,7 +1999,10 @@ a.catalog__btn {
 }
 
 .team-card__title {
+
     font-size: var(--font-size-base);
+
+
     color: var(--color-primary);
     margin: 0;
 }
@@ -2059,9 +2064,9 @@ a.catalog__btn {
 }
 
 .contact__info-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    padding: 0; /* Remove default padding */
+    list-style: none;
+    margin: 0;
 }
 
 .contact__info-item {
@@ -2102,15 +2107,25 @@ a.catalog__btn {
 
 .contact__form-input,
 .contact__form-textarea {
+    
     width: 100%;
+    
     padding: 15px;
+    
     border: 2px solid #e0e0e0;
+    
     border-radius: 4px;
+    
     font-size: 16px;
+    
     transition: border-color 0.3s ease;
+    
 }
 
+
+
 .contact__form-input:focus,
+
 .contact__form-textarea:focus {
     outline: none;
     border-color: #ff6b00;
@@ -3831,10 +3846,7 @@ body.mobile-menu-open {
 /* Главный блок (Hero Section) */
 .model-hero {
     position: relative;
-    width: 100%;
-    height: 100vh;
-    min-height: 600px;
-    overflow: hidden;
+    padding-top: 70px; /* Отступ для фиксированного меню */
 }
 
 .model-hero__background {
@@ -3994,15 +4006,21 @@ body.mobile-menu-open {
 }
 
 .model-info__section-title {
-    font-family: var(--font-family-primary);
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-3xl); /* Smaller, more consistent size */
     font-weight: var(--font-weight-bold);
     color: var(--color-text-primary);
     margin-bottom: var(--spacing-xl);
     padding-bottom: var(--spacing-md);
-    border-bottom: 3px solid var(--color-primary);
-    display: inline-block;
+    border-bottom: 2px solid var(--color-border-light);
+    position: relative;
 }
+
+@media (max-width: 768px) {
+    .model-info__section-title {
+        font-size: var(--font-size-2xl); /* Adjust for smaller screens */
+    }
+}
+
 
 .model-info__text-content {
     margin-bottom: var(--spacing-2xl);
